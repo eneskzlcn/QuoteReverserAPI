@@ -73,38 +73,9 @@ func TestIGroupQuotesByAuthorsSuccessfully(t *testing.T){
 }
 //test reverse operation
 
-func TestIReverseTheAuthorsSentencesSuccessfully(t *testing.T){
-	testData := []InputQuote{
-		{
-			Author: "Einstein",
-			Text:   "Physics",
-		},
-		{
-			Author: "Einstein",
-			Text:   "Music",
-		},
-		{
-			Author: "Einstein",
-			Text:   "Physics",
-		},
-		{
-			Author: "Einstein",
-			Text:   "Silence",
-		},
-		{
-			Author: "Edward",
-			Text:   "Physics",
-		},
-		{
-			Author: "Edward",
-			Text:   "Music",
-		},
-	}
-	for index, quote := range testData {
-		testData[index].Text = Reverse(quote.Text)
-	}
-	quotes := OutputQuotes{}
-	quotes.ConstructWithGivenSlice(testData)
+func TestIReverseSentencesSuccessfully(t *testing.T){
 
-	assert.Equalf(t, quotes["Einstein"].Quotes[0],"scisyhP","If the reverse operation done , Physics should be scisyhP")
+	textToReverse := "Physics"
+	reversedText := Reverse(textToReverse)
+	assert.Equalf(t, "scisyhP",reversedText,"If the reverse operation done , Physics should be scisyhP")
 }
