@@ -25,4 +25,5 @@ func main(){
 	outputQuotes := OutputQuotes{}
 	outputQuotes.ConstructWithGivenSlice(inputQuoteSlice)
 	outputQuotes.PrintAsWantedJSON()
+	//CreateResponseFileFromOutputQuotes(outputQuotes) creates a json file that contains consumed and reversed data
 }
