@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"github.com/spf13/viper"
-	"io/ioutil"
 	"log"
 )
 //GetEnv function docs from https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
@@ -29,10 +27,4 @@ func Reverse(stringToReverse string) string{
 		stringToReverseAsByte[i], stringToReverseAsByte[j] = stringToReverseAsByte[j], stringToReverseAsByte[i]
 	}
 	return string(stringToReverseAsByte)
-}
-func CreateResponseFileFromOutputQuotes(quotes OutputQuotes) error {
-	quotesAsSlice:= quotes.TransformToSlice()
-	file, _ := json.MarshalIndent(quotesAsSlice, "", " ")
-	err := ioutil.WriteFile("test.json", file, 0644)
-	return err
 }

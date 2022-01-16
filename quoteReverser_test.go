@@ -12,14 +12,10 @@ import (
 
 //unit testing
 
-
 //test fetching quotes
 
 func TestIFetchQuotesSuccessfully(t *testing.T){
-	quotes := []InputQuote{{
-		Author: "Einstein",
-		Text:   "Physics",
-	}}
+	quotes := make([]Quote,0)
 	resp, err := http.Get(GetEnv("API_BASE_URL"))
 	if err != nil {
 		log.Println(err.Error())
@@ -31,14 +27,14 @@ func TestIFetchQuotesSuccessfully(t *testing.T){
 	for index, quote := range quotes {
 		log.Println(fmt.Sprintf("%d-%s-%s",index,quote.Author,quote.Text))
 	}
-	quot := OutputQuotes{}
-	quot.ConstructWithGivenSlice(quotes)
-	quot.Print()
+	quotesMap := AuthorsQuotesMap{}
+	quotesMap.ConstructWithGivenSlice(quotes)
+	quotesMap.PrintAsWantedJSON()
 }
 //test grouping by authors
 func TestIGroupQuotesByAuthorsSuccessfully(t *testing.T){
 
-	testData := []InputQuote{
+	testData := []Quote{
 		{
 			Author: "Einstein",
 			Text:   "Physics",
@@ -64,11 +60,11 @@ func TestIGroupQuotesByAuthorsSuccessfully(t *testing.T){
 			Text:   "Music",
 		},
 	}
-	quotes := OutputQuotes{}
+	quotes := AuthorsQuotesMap{}
 	quotes.ConstructWithGivenSlice(testData)
 
-	assert.Equalf(t,2,len(quotes["Edward"].Quotes),"Edward has 2 sentences if the grouping operation is done in truth")
-	assert.Equalf(t,4,len(quotes["Einstein"].Quotes),"Einstein has 3 sentences if the grouping operation is done in truth")
+	assert.Equalf(t,2,len(quotes["Edward"]),"Edward has 2 sentences if the grouping operation is done in truth")
+	assert.Equalf(t,4,len(quotes["Einstein"]),"Einstein has 3 sentences if the grouping operation is done in truth")
 
 }
 //test reverse operation
