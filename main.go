@@ -19,7 +19,7 @@ func(aqm *AuthorsQuotesMap) ConstructWithGivenSlice(quotes []Quote){
 	}
 }
 func(aqm *AuthorsQuotesMap) Add(quote Quote ){
-	(*aqm)[quote.Author] = append((*aqm)[quote.Author],quote.Text)
+	(*aqm)[quote.Author] = append((*aqm)[quote.Author],Reverse(quote.Text))
 }
 func(aqm AuthorsQuotesMap)  PrintAsWantedJSON() {
 	type AuthorsQuotes struct {
@@ -44,7 +44,7 @@ func ConsumeQuoteApi(quotes *[]Quote) error{
 	if err != nil {
 		return err
 	}
-	body, err := io.ReadAll(resp.Body)
+	body,_ := io.ReadAll(resp.Body)
 	if err := json.Unmarshal(body,quotes); err != nil{
 		return err
 	}
@@ -53,7 +53,10 @@ func ConsumeQuoteApi(quotes *[]Quote) error{
 
 func main(){
 	var readingQuotes []Quote
-	ConsumeQuoteApi(&readingQuotes)
+	err := ConsumeQuoteApi(&readingQuotes)
+	if err != nil {
+		log.Println("Error consuming the api")
+	}
 	authorsQuotesMap :=AuthorsQuotesMap{}
 	authorsQuotesMap.ConstructWithGivenSlice(readingQuotes)
 	authorsQuotesMap.PrintAsWantedJSON()

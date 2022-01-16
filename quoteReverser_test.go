@@ -9,7 +9,6 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
 )
 
 func TestIFetchQuotesSuccessfully(t *testing.T){
@@ -18,7 +17,7 @@ func TestIFetchQuotesSuccessfully(t *testing.T){
 	if err != nil {
 		log.Println(err.Error())
 	}
-	body, err := io.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	if err := json.Unmarshal(body,&quotes); err != nil{
 		log.Println("Can not parse body into quotes struct ")
 	}
