@@ -10,10 +10,6 @@ import (
 	"testing"
 )
 
-//unit testing
-
-//test fetching quotes
-
 func TestIFetchQuotesSuccessfully(t *testing.T){
 	quotes := make([]Quote,0)
 	resp, err := http.Get(GetEnv("API_BASE_URL"))
