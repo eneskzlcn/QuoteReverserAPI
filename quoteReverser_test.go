@@ -3,11 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"io"
 	"log"
 	"net/http"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+
 )
 
 func TestIFetchQuotesSuccessfully(t *testing.T){
