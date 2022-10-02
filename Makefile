@@ -1,6 +1,6 @@
 build:
-	go build -o bin/main main.go utility.go
+	go build -o bin/quote-reverser-client .cmd/quote-reverser-client
 clean:
-	rm -R bin
+	rm -rf bin
 run:
-	bin/main
+	./bin/quote-reverser-client
